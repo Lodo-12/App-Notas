@@ -28,6 +28,9 @@ class AddScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white)
                ),
+               onChanged: (value) {
+                 titleText = value;
+               },
              ),
               Expanded(
                 child: TextField(
@@ -36,13 +39,24 @@ class AddScreen extends StatelessWidget {
                    hintText: 'New Description',
                    hintStyle: TextStyle(fontSize: 18,
                     color: Colors.white),
-                  
                  ),
+                 onChanged: (value){
+                   descriptionText = value;
+                 },
                 )      
-              )],
+              ),
+            // ignore: deprecated_member_use
+            FlatButton(
+              onPressed: (){},
+             child: Text('Add note', style:TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white)
+               ),)
+                ],
+            )  
          ),
          
-         ),
-    );
+         );
   }
 }
