@@ -1,12 +1,13 @@
+import 'package:crud_notas/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddScreen extends StatelessWidget {
-  const AddScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String titleText;
-    String descriptionText;
+   late String titleText;
+   late String descriptionText;
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 38, 24, 18),
@@ -19,6 +20,7 @@ class AddScreen extends StatelessWidget {
         body:
          Padding(padding: EdgeInsets.all(15),
          child: Column(
+           crossAxisAlignment: CrossAxisAlignment.stretch,
            children: [
              TextField(
                decoration: InputDecoration(
@@ -47,7 +49,11 @@ class AddScreen extends StatelessWidget {
               ),
             // ignore: deprecated_member_use
             FlatButton(
-              onPressed: (){},
+              onPressed: (){
+                Provider.of<NotesOperation>(context,listen: false).AddNote(
+                  titleText,descriptionText);
+                  Navigator.pop(context);
+              },
              child: Text('Add note', style:TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

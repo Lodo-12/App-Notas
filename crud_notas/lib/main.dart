@@ -1,5 +1,6 @@
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/screens/home_screen.dart';
+import 'package:crud_notas/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/screens/login_screen.dart';
 import 'package:crud_notas/services/auth_service.dart';
@@ -29,11 +30,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Notas App',
-     initialRoute: 'home',
+     initialRoute: 'register',
      routes: {
        'login': (_) => LoginScreen(),
        'register': (_) => RegisterScreen(),
        'home': (_) => HomeScreen(),
+       'note': (_) => NoteScreen(),
      },
     );
   }

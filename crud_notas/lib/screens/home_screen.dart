@@ -36,8 +36,9 @@ class HomeScreen extends StatelessWidget {
         itemCount: noteOperation.getNotes.length,
        itemBuilder: (BuildContext context, int index){
          return NotesCard(noteOperation.getNotes[index]);
-
+         
        },
+
       
       )
      );
