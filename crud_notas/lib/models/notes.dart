@@ -7,11 +7,11 @@ import 'dart:convert';
 class Notes {
     Notes({
         required this.description,
-        required this.title,
+         this.title,
     });
 
     String description;
-    String title;
+    String? title;
 
     factory Notes.fromJson(String str) => Notes.fromMap(json.decode(str));
 
