@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 class ProductsService extends ChangeNotifier{
   
   final String _baseUrl = 'https://notasv2-27921-default-rtdb.firebaseio.com/';
-  final List<Notes> notes =[];
+  final List<Notes> note =[];
   late Notes? selectedNotes;
 
   final storage = new FlutterSecureStorage();
@@ -39,7 +39,7 @@ Future<List<Notes>> loadNotes() async{
 
   productsMap.forEach((key, value) {
   final tempNote = Notes.fromMap(value!);
-  this.notes.add(tempNote);    
+  this.note.add(tempNote);    
 
   }
 );
@@ -47,7 +47,7 @@ Future<List<Notes>> loadNotes() async{
 this.isLoading = false;
 notifyListeners();
 
-return this.notes;
+return this.note;
 
 }
 
@@ -56,9 +56,9 @@ Future saveOrCreateProduct( Note product) async{
   isSaving= true;
   notifyListeners();
 
-  if( product.id == null){
+  if( note. == null){
 
-    await this.createProduct(product);
+    await this.createProduct(note);
   } else{
 
     await this.updateProduct(product);
@@ -70,7 +70,7 @@ Future saveOrCreateProduct( Note product) async{
 
 }
 
-Future<String> updateProduct (Product product) async {
+Future<String> updateProduct (Note product) async {
 
  final url = Uri.https(_baseUrl, 'products/${ product.id}.json');
  final resp = await http.put(url, body:product.toJson() );
@@ -84,7 +84,7 @@ return product.id!;
 }
 
 
-Future<String> createProduct (Product product) async {
+Future<String> createProduct (Note product) async {
 
  final url = Uri.https(_baseUrl, 'products.json');
  final resp = await http.post(url, body:product.toJson() );
