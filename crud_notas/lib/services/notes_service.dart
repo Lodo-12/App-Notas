@@ -10,7 +10,8 @@ class NotesService extends ChangeNotifier{
   
   final String _baseUrl = 'notasv2-27921-default-rtdb.firebaseio.com';
   final List<Nota> notes =[];
-   Nota selectedNote = Nota(description: '', title: '');
+  Nota selectedNote = Nota(description: '', title: '');
+  // late Nota? selectedNote;
 
   final storage = new FlutterSecureStorage();
   
@@ -24,27 +25,27 @@ class NotesService extends ChangeNotifier{
 
 Future<List<Nota>> loadNotes() async{
 
-print(loadNotes());
-//   this.isLoading = true;
-//   notifyListeners();
+print(loadNotes()),
+  // this.isLoading = true;
+  // notifyListeners();
 
-//   final url = Uri.https(_baseUrl, 'notes.json',{
-//     'auth': await storage.read(key: 'token') ?? ''
-//   });
-//   final resp = await http.get(url);
+  // final url = Uri.https(_baseUrl, 'notes.json',{
+  //   'auth': await storage.read(key: 'token') ?? ''
+  // });
+  // final resp = await http.get(url);
 
-//   final Map<String, dynamic> notesMap = json.decode(resp.body);
+  // final Map<String, dynamic> notesMap = json.decode(resp.body);
 
-//   notesMap.forEach((key, value) {
-//   final tempNote = Nota.fromMap(value);
-//   tempNote.id= key;
-//   this.notes.add(tempNote);    
+  // notesMap.forEach((key, value) {
+  // final tempNote = Nota.fromMap(value);
+  // tempNote.id= key;
+  // this.notes.add(tempNote);    
 
-//   }
-// );
+  // }
+);
 
-// this.isLoading = false;
-// notifyListeners();
+this.isLoading = false;
+notifyListeners();
 
 return this.notes;
 
@@ -89,8 +90,8 @@ Future<String> createNotes (Nota note) async {
  final resp = await http.post(url, body:note.toJson() );
  final decodedData = json.decode(resp.body);
 
-note.id = decodedData['title'];
-  // this.products.add(product);
+note.id = decodedData['name'];
+  this.notes.add(note);
 
 return note.id!;
  }

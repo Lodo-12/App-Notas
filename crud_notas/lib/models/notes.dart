@@ -6,7 +6,7 @@ import 'dart:convert';
 
 class Notes {
     Notes({
-        this.nota,
+        this.nota, required String description, required String title,
     });
 
     Nota? nota;
@@ -16,7 +16,7 @@ class Notes {
     String toJson() => json.encode(toMap());
 
     factory Notes.fromMap(Map<String, dynamic> json) => Notes(
-        nota: Nota.fromMap(json["nota"]),
+        nota: Nota.fromMap(json["nota"]), description: '', title: '',
     );
 
     Map<String, dynamic> toMap() => {
@@ -26,13 +26,13 @@ class Notes {
 
 class Nota {
     Nota({
-        required this.description,
         required this.title,
+        required this.description,
         this.id
     });
 
-    String description;
     String title;
+    String description;
     String? id;
 
     factory Nota.fromJson(String str) => Nota.fromMap(json.decode(str));
@@ -40,13 +40,13 @@ class Nota {
     String toJson() => json.encode(toMap());
 
     factory Nota.fromMap(Map<String, dynamic> json) => Nota(
-        description: json["description"],
         title: json["title"],
+        description: json["description"],
     );
 
     Map<String, dynamic> toMap() => {
-        "description": description,
         "title": title,
+        "description": description,
         "id": id,
     };
 

@@ -86,8 +86,6 @@ class _NoteBackScreen extends StatelessWidget {
               onPressed:  noteService.isSaving
         ? null
         : ()async{
-         if( !noteForm.isValidForm()) return;
-
          await noteService.saveOrCreateNote(noteForm.note);
               },
                )
