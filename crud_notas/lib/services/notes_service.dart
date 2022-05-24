@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http;
 class NotesService extends ChangeNotifier{
   
   final String _baseUrl = 'notasv2-27921-default-rtdb.firebaseio.com';
-  final List<Notes> notes =[];
-   Notes selectedNote = Notes(description: '', title: '');
+  final List<Nota> notes =[];
+   Nota selectedNote = Nota(description: '', title: '');
 
   final storage = new FlutterSecureStorage();
   
@@ -22,34 +22,35 @@ class NotesService extends ChangeNotifier{
   }
 
 
-Future<List<Notes>> loadNotes() async{
+Future<List<Nota>> loadNotes() async{
 
-  this.isLoading = true;
-  notifyListeners();
+print(loadNotes());
+//   this.isLoading = true;
+//   notifyListeners();
 
-  final url = Uri.https(_baseUrl, 'notes.json',{
-    'auth': await storage.read(key: 'token') ?? ''
-  });
-  final resp = await http.get(url);
+//   final url = Uri.https(_baseUrl, 'notes.json',{
+//     'auth': await storage.read(key: 'token') ?? ''
+//   });
+//   final resp = await http.get(url);
 
-  final Map<String, dynamic> notesMap = json.decode(resp.body);
+//   final Map<String, dynamic> notesMap = json.decode(resp.body);
 
-  notesMap.forEach((key, value) {
-  final tempNote = Notes.fromMap(value);
-  tempNote.id= key;
-  this.notes.add(tempNote);    
+//   notesMap.forEach((key, value) {
+//   final tempNote = Nota.fromMap(value);
+//   tempNote.id= key;
+//   this.notes.add(tempNote);    
 
-  }
-);
+//   }
+// );
 
-this.isLoading = false;
-notifyListeners();
+// this.isLoading = false;
+// notifyListeners();
 
 return this.notes;
 
 }
 
-Future saveOrCreateNote( Notes note) async{
+Future saveOrCreateNote( Nota note) async{
 
   isSaving= true;
   notifyListeners();
@@ -68,7 +69,7 @@ Future saveOrCreateNote( Notes note) async{
 
 }
 
-Future<String> updateNotes (Notes note) async {
+Future<String> updateNotes (Nota note) async {
 
  final url = Uri.https(_baseUrl, 'notes/${ note.id}.json');
  final resp = await http.put(url, body:note.toJson() );
@@ -82,7 +83,7 @@ return note.id!;
 }
 
 
-Future<String> createNotes (Notes note) async {
+Future<String> createNotes (Nota note) async {
 
  final url = Uri.https(_baseUrl, 'notes.json');
  final resp = await http.post(url, body:note.toJson() );

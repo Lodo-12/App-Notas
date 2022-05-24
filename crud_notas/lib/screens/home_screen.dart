@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
 
 class _NotesCard extends StatelessWidget {
   
-  final Notes note;
+  final Nota note;
 
   const _NotesCard({
     super.key,

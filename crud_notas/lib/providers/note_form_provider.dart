@@ -5,7 +5,7 @@ class NoteFormProvider extends ChangeNotifier {
 
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
-  Notes note;
+  Nota note;
 
   NoteFormProvider( this.note );
 
