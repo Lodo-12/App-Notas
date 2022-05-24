@@ -1,28 +1,25 @@
 
-import 'package:crud_notas/models/notes.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'dart:io';
-import 'package:crud_notas/models/models.dart';
+import 'package:crud_notas/models/notes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class ProductsService extends ChangeNotifier{
+class NotesService extends ChangeNotifier{
   
-  final String _baseUrl = 'https://notasv2-27921-default-rtdb.firebaseio.com/';
-  final List<Notes> note =[];
-  late Notes? selectedNotes;
+  final String _baseUrl = 'notasv2-27921-default-rtdb.firebaseio.com';
+  final List<Notes> notes =[];
+  late Notes? selectedNote;
 
   final storage = new FlutterSecureStorage();
-
+  
   bool isLoading = true;
   bool isSaving = false;
 
-  NotessService(){
+  NotesService(){
     this.loadNotes();
   }
-
 
 
 Future<List<Notes>> loadNotes() async{
@@ -35,11 +32,12 @@ Future<List<Notes>> loadNotes() async{
   });
   final resp = await http.get(url);
 
-  final Map<String, dynamic> productsMap = json.decode(resp.body);
+  final Map<String, dynamic> notesMap = json.decode(resp.body);
 
-  productsMap.forEach((key, value) {
-  final tempNote = Notes.fromMap(value!);
-  this.note.add(tempNote);    
+  notesMap.forEach((key, value) {
+  final tempNote = Notes.fromMap(value);
+  tempNote.id= key;
+  this.notes.add(tempNote);    
 
   }
 );
@@ -47,21 +45,21 @@ Future<List<Notes>> loadNotes() async{
 this.isLoading = false;
 notifyListeners();
 
-return this.note;
+return this.notes;
 
 }
 
-Future saveOrCreateProduct( Note product) async{
+Future saveOrCreateNote( Notes note) async{
 
   isSaving= true;
   notifyListeners();
 
-  if( note. == null){
+  if( note.id == null){
 
-    await this.createProduct(note);
+    await this.createNotes(note);
   } else{
 
-    await this.updateProduct(product);
+    await this.updateNotes(note);
 
   }
 
@@ -70,30 +68,30 @@ Future saveOrCreateProduct( Note product) async{
 
 }
 
-Future<String> updateProduct (Note product) async {
+Future<String> updateNotes (Notes note) async {
 
- final url = Uri.https(_baseUrl, 'products/${ product.id}.json');
- final resp = await http.put(url, body:product.toJson() );
+ final url = Uri.https(_baseUrl, 'notes/${ note.id}.json');
+ final resp = await http.put(url, body:note.toJson() );
  final decodedData = resp.body;
 
 
-  final index = this.products.indexWhere((element) => element.id ==product.id);
-  this.products[index] = product;
+  final index = this.notes.indexWhere((element) => element.id ==note.id);
+  this.notes[index] = note;
 
-return product.id!;
+return note.id!;
 }
 
 
-Future<String> createProduct (Note product) async {
+Future<String> createNotes (Notes note) async {
 
- final url = Uri.https(_baseUrl, 'products.json');
- final resp = await http.post(url, body:product.toJson() );
+ final url = Uri.https(_baseUrl, 'notes.json');
+ final resp = await http.post(url, body:note.toJson() );
  final decodedData = json.decode(resp.body);
 
-product.id = decodedData['name'];
+note.id = decodedData['title'];
   // this.products.add(product);
 
-return product.id!;
+return note.id!;
  }
-
+  
 }

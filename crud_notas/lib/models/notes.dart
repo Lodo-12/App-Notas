@@ -7,11 +7,13 @@ import 'dart:convert';
 class Notes {
     Notes({
         required this.description,
-         this.title,
+         required this.title,
+         this.id
     });
 
     String description;
-    String? title;
+    String title;
+    String? id;
 
     factory Notes.fromJson(String str) => Notes.fromMap(json.decode(str));
 
@@ -26,4 +28,10 @@ class Notes {
         "description": description,
         "title": title,
     };
+
+    Notes copy() => Notes(
+      title: this.title,
+      description: this.description,
+      id: this.id,
+    );
 }

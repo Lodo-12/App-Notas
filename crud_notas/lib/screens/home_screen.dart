@@ -1,4 +1,6 @@
+import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/screens/screens.dart';
+import 'package:crud_notas/services/notes_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:crud_notas/models/models.dart';
@@ -11,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-  final noteOperation = Provider.of<NotesOperation>(context);
+  final noteServices = Provider.of<NotesService>(context);
 
 
     return Scaffold(
@@ -19,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white10,
         onPressed: () { 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => NoteScreen(),));
          },
         child: Icon(
            CupertinoIcons.add,
@@ -33,23 +35,29 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       body: ListView.builder(
-        itemCount: noteOperation.getNotes.length,
-       itemBuilder: (BuildContext context, int index){
-         return NotesCard(noteOperation.getNotes[index]);
-         
-       },
-
+        itemCount: noteServices.notes.length,
+       itemBuilder: (BuildContext context, int index)=>GestureDetector(
+          onTap: (){
+            noteServices.selectedNote = noteServices.notes[index].copy();
+            Navigator.pushNamed(context, 'note');
+          },
+          child: _NotesCard(
+            note:noteServices.notes[index],
+          )
+            ),
+          )
       
-      )
-     );
+      );
   }
 }
 
-class NotesCard extends StatelessWidget {
+class _NotesCard extends StatelessWidget {
   
-  final Note note;
+  final Notes note;
 
-  const NotesCard(this.note);
+  const _NotesCard({
+    super.key,
+     required this.note});
 
   @override
   Widget build(BuildContext context) {

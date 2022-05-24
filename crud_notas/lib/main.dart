@@ -1,6 +1,8 @@
 import 'package:crud_notas/models/models.dart';
+import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:crud_notas/screens/home_screen.dart';
 import 'package:crud_notas/screens/screens.dart';
+import 'package:crud_notas/services/notes_service.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/screens/login_screen.dart';
 import 'package:crud_notas/services/auth_service.dart';
@@ -17,7 +19,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
        ChangeNotifierProvider(create: (_)=>Authservice()),
-       ChangeNotifierProvider(create: (_)=> NotesOperation())
+       ChangeNotifierProvider(create: (_)=> NotesService()),
        ],
       child: MyApp(),
     );
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Notas App',
-     initialRoute: 'register',
+     initialRoute: 'home',
      routes: {
        'login': (_) => LoginScreen(),
        'register': (_) => RegisterScreen(),
