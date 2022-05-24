@@ -1,12 +1,9 @@
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/models/notes.dart';
+import 'package:flutter/material.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:crud_notas/services/notes_service.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-
-import 'package:flutter/material.dart';
 
 
 class NoteScreen extends StatelessWidget {
@@ -16,7 +13,7 @@ class NoteScreen extends StatelessWidget {
     final noteService = Provider.of<NotesService>(context);
 
     return ChangeNotifierProvider(
-      create: ( _ ) => NoteFormProvider( noteService.selectedNote! ),
+      create: ( _ ) => NoteFormProvider( noteService.selectedNote ),
       child: _NoteBackScreen( noteService : noteService),
     );
   }

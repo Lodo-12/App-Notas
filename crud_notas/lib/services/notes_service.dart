@@ -10,7 +10,7 @@ class NotesService extends ChangeNotifier{
   
   final String _baseUrl = 'notasv2-27921-default-rtdb.firebaseio.com';
   final List<Notes> notes =[];
-  late Notes? selectedNote;
+   Notes selectedNote = Notes(description: '', title: '');
 
   final storage = new FlutterSecureStorage();
   
