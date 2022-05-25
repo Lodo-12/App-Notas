@@ -1,6 +1,5 @@
-import 'package:crud_notas/services/note_service.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:crud_notas/screens/home_screen.dart';
@@ -38,8 +37,7 @@ class MyApp extends StatelessWidget {
        'login': (_) => LoginScreen(),
        'register': (_) => RegisterScreen(),
        'home': (_) => HomeScreen(),
-       'note': (_) => NoteBackScreen(),
-      //  'note': (_) => NoteScreen(),
+       'note': (_) => NoteScreen(),
      },
     );
   }

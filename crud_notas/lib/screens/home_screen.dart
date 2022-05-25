@@ -1,6 +1,8 @@
+import 'package:crud_notas/screens/loading_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/screens/screens.dart';
-import 'package:flutter/material.dart';
+import 'package:crud_notas/services/note_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:provider/provider.dart';
@@ -8,15 +10,21 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
 
+
   @override
   Widget build(BuildContext context) {
+
+
+  final notesService = Provider.of<NotesService>(context);
+  if( notesService.isLoading) return LoadingScreen();
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 38, 24, 18),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white10,
         onPressed: () { 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => NoteBackScreen(),));
+             
+            Navigator.pushNamed(context, 'note');
          },
         child: Icon(
            CupertinoIcons.add,
@@ -29,18 +37,18 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      // body: ListView.builder(
-      //   itemCount: noteServices.notes.length,
-      //  itemBuilder: (BuildContext context, int index)=>GestureDetector(
-      //     onTap: (){
-      //       noteServices.selectedNote = noteServices.notes[index].copy();
-      //       Navigator.pushNamed(context, 'note');
-      //     },
-      //     child: _NotesCard(
-      //       note:noteServices.notes[index],
-      //     )
-      //       ),
-      //     )
+      body: ListView.builder(
+        itemCount: notesService.notes.length,
+       itemBuilder: (BuildContext context, int index)=>GestureDetector(
+          onTap: (){
+            notesService.selectedNote = notesService.notes[index].copy();
+            Navigator.pushNamed(context, 'note');
+          },
+          child: _NotesCard(
+            note:notesService.notes[index],
+          )
+            ),
+          )
       
       );
   }
@@ -48,7 +56,7 @@ class HomeScreen extends StatelessWidget {
 
 class _NotesCard extends StatelessWidget {
   
-  final Nota note;
+  final Notes note;
 
   const _NotesCard({
     super.key,

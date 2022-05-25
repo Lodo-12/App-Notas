@@ -1,4 +1,6 @@
 import 'package:crud_notas/services/note_service.dart';
+import 'package:crud_notas/ui/input_decorations.dart';
+import 'package:crud_notas/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/models/models.dart';
@@ -7,32 +9,32 @@ import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:provider/provider.dart';
 
 
-// class NoteScreen extends StatelessWidget {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final noteService = Provider.of<NotesService>(context);
-
-//     return ChangeNotifierProvider(
-//       create: ( _ ) => NoteFormProvider( noteService.selectedNote ),
-//       child: _NoteBackScreen( noteService : noteService),
-//     );
-//   }
-// }
-
-
-class NoteBackScreen extends StatelessWidget {
-
-
-  final TextEditingController _titleController = new TextEditingController();
-  final TextEditingController _descriptionController = new TextEditingController();
-  final GlobalKey<FormState>  _formularioKey = GlobalKey<FormState>();
-
+class NoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   late String titleText;
-   late String descriptionText;
+    final noteService = Provider.of<NotesService>(context);
+
+    return ChangeNotifierProvider(
+      create: ( _ ) => NoteFormProvider( noteService.selectedNote!),
+      child: _NoteBackScreen( noteService : noteService),
+    );
+  }
+}
+
+
+class _NoteBackScreen extends StatelessWidget {
+
+  const _NoteBackScreen({super.key,
+   required this.noteService});
+
+  final NotesService noteService;
+
+  @override
+  Widget build(BuildContext context) {
+
+    final notesForm = Provider.of<NoteFormProvider>(context);
+    final note = notesForm.note;
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 38, 24, 18),
@@ -45,83 +47,44 @@ class NoteBackScreen extends StatelessWidget {
         body:
          Padding(padding: EdgeInsets.all(15),
          child: Form(
-           key: _formularioKey,
+           key: notesForm.formKey,
            autovalidateMode: AutovalidateMode.onUserInteraction,
            child: Column(
              crossAxisAlignment: CrossAxisAlignment.stretch,
              children: [
-               TextFormField(
-                 controller: _titleController,
-                 decoration: InputDecoration(
-                   border: InputBorder.none ,
-                   hintText: 'New Title',
-                   hintStyle: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-                 ),
-                 validator: (String? dato){
-                   if(dato!.isEmpty){
-                     return 'No has puesto nada';
-                   }
-                 },
-                 onChanged: (value) {
-                   titleText = value;
-                 },
-               ),
-                Expanded(
-                  child: TextFormField(
-                    controller: _descriptionController,
-                   decoration: InputDecoration(
-                     border: InputBorder.none ,
-                     hintText: 'New Description',
-                     hintStyle: TextStyle(fontSize: 18,
-                      color: Colors.white),
-                   ),
-                   validator: (String? dato){
-                   if(dato!.isEmpty){
-                     return 'No has puesto nada';
-                   }
-                 },
-                   onChanged: (value){
-                     descriptionText = value;
-                   },
-                  )      
+
+              SizedBox(height: 10),
+
+                TextFormField(
+                  initialValue: note.title,
+                  onChanged: (value)=> note.title = value,
+                  validator: (value) {
+                    if( value == null || value.length < 1)
+                    return 'El titulo es obligatorio';
+                  },
+                  decoration: InputDecorations.authInputDecoration(
+                    hintText: 'Titulo',
+                    labelText: 'Titulo:'
+                    ),
                 ),
-              // ignore: deprecated_member_use
-              FlatButton(
-               child: 
-                  // ? CircularProgressIndicator( color: Colors.white,)
-                   Text('Add note', style:TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)
-                 ),
-                onPressed: ()async{
-                  if( _formularioKey.currentState!.validate()){
 
-                    bool resp = await NoteServices().saveNotes(
-                      _titleController.text, _descriptionController.text
-                    );
-                    if (resp){
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('nota añadida'),
-                          backgroundColor: Colors.green, 
-                        )
-                      );
-                    } else{
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('algo salió mal'),
-                          backgroundColor: Colors.red, 
-                        )
-                      );
-                    }
+              SizedBox(height: 10),
 
-                  }
-                }
-                 )
+                TextFormField(
+                  initialValue: note.description,
+                  onChanged: (value)=> note.description = value,
+                  validator: (value) {
+                    if( value == null || value.length < 1)
+                    return 'La descripcion es obligatoria';
+                  },
+                  decoration: InputDecorations.authInputDecoration(
+                    hintText: 'Descripcion',
+                    labelText: 'Descripcion:'
+                    ),
+                )
+              //  NoteCard(notes: null,),
+
+
                   ],
               ),
          )  
@@ -129,5 +92,8 @@ class NoteBackScreen extends StatelessWidget {
          
          );
   }
+  
 }
+  
+  
 
