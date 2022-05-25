@@ -4,58 +4,54 @@
 
 import 'dart:convert';
 
+// class Notes {
+//     Notes({
+//         this.nota1,
+//         this.nota2,
+//     });
+
+//     Nota nota1;
+//     Nota nota2;
+
+//     factory Notes.fromJson(String str) => Notes.fromMap(json.decode(str));
+
+//     String toJson() => json.encode(toMap());
+
+//     factory Notes.fromMap(Map<String, dynamic> json) => Notes(
+//         nota1: Nota.fromMap(json["nota1"]),
+//         nota2: Nota.fromMap(json["nota2"]),
+//     );
+
+//     Map<String, dynamic> toMap() => {
+//         "nota1": nota1.toMap(),
+//         "nota2": nota2.toMap(),
+//     };
+// }
+
 class Notes {
     Notes({
-        this.nota, required String description, required String title,
+        required this.description,
+        required this.title,
     });
 
-    Nota? nota;
+    String description;
+    String title;
 
     factory Notes.fromJson(String str) => Notes.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
 
     factory Notes.fromMap(Map<String, dynamic> json) => Notes(
-        nota: Nota.fromMap(json["nota"]), description: '', title: '',
-    );
-
-    Map<String, dynamic> toMap() => {
-        "nota": nota?.toMap(),
-    };
-}
-
-class Nota {
-    Nota({
-        required this.title,
-        required this.description,
-        this.id
-    });
-
-    String title;
-    String description;
-    String? id;
-
-    factory Nota.fromJson(String str) => Nota.fromMap(json.decode(str));
-
-    String toJson() => json.encode(toMap());
-
-    factory Nota.fromMap(Map<String, dynamic> json) => Nota(
-        title: json["title"],
         description: json["description"],
+        title: json["title"],
     );
 
     Map<String, dynamic> toMap() => {
-        "title": title,
         "description": description,
-        "id": id,
+        "title": title,
     };
-
-    Nota copy() => Nota(
-      title: this.title,
-      description: this.description,
-      id: this.id,
-    );
 }
+
 
 
 

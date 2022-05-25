@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Note{
-   String title;
-   String description;
-
   Note(
   this.title,
-  this.description);
-
+  this.description,
+  this.key
+  );
+   String? title;
+   String? description;
+   String? key;
 
 }

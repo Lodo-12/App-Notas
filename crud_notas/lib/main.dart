@@ -1,9 +1,10 @@
+import 'package:crud_notas/services/note_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:crud_notas/screens/home_screen.dart';
 import 'package:crud_notas/screens/screens.dart';
-import 'package:crud_notas/services/notes_service.dart';
 import 'package:crud_notas/screens/login_screen.dart';
 import 'package:crud_notas/services/auth_service.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
        ChangeNotifierProvider(create: (_)=>Authservice()),
-       ChangeNotifierProvider(create: (_)=> NotesService()),
+       ChangeNotifierProvider(create: (_)=>NotesService()),
        ],
       child: MyApp(),
     );
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
        'login': (_) => LoginScreen(),
        'register': (_) => RegisterScreen(),
        'home': (_) => HomeScreen(),
-       'note': (_) => NoteScreen(),
+       'note': (_) => NoteBackScreen(),
+      //  'note': (_) => NoteScreen(),
      },
     );
   }

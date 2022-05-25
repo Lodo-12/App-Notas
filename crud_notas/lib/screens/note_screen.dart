@@ -1,6 +1,8 @@
+import 'package:crud_notas/services/note_service.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/models/notes.dart';
-import 'package:flutter/material.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,19 +21,18 @@ import 'package:provider/provider.dart';
 // }
 
 
-class _NoteBackScreen extends StatelessWidget {
+class NoteBackScreen extends StatelessWidget {
 
 
   final TextEditingController _titleController = new TextEditingController();
   final TextEditingController _descriptionController = new TextEditingController();
-  final GlobalKey  _formularioKey = GlobalKey<FormState>();
+  final GlobalKey<FormState>  _formularioKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
    late String titleText;
    late String descriptionText;
-
-   final noteForm = Provider.of<NoteFormProvider>(context);
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 38, 24, 18),
@@ -56,8 +57,13 @@ class _NoteBackScreen extends StatelessWidget {
                    hintText: 'New Title',
                    hintStyle: TextStyle(fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white)
+                    color: Colors.white),
                  ),
+                 validator: (String? dato){
+                   if(dato!.isEmpty){
+                     return 'No has puesto nada';
+                   }
+                 },
                  onChanged: (value) {
                    titleText = value;
                  },
@@ -71,6 +77,11 @@ class _NoteBackScreen extends StatelessWidget {
                      hintStyle: TextStyle(fontSize: 18,
                       color: Colors.white),
                    ),
+                   validator: (String? dato){
+                   if(dato!.isEmpty){
+                     return 'No has puesto nada';
+                   }
+                 },
                    onChanged: (value){
                      descriptionText = value;
                    },
@@ -85,10 +96,30 @@ class _NoteBackScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.white)
                  ),
-                onPressed: (){
-                  if( _formularioKey.currentState!.validate(){
+                onPressed: ()async{
+                  if( _formularioKey.currentState!.validate()){
 
-                  },
+                    bool resp = await NoteServices().saveNotes(
+                      _titleController.text, _descriptionController.text
+                    );
+                    if (resp){
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('nota añadida'),
+                          backgroundColor: Colors.green, 
+                        )
+                      );
+                    } else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('algo salió mal'),
+                          backgroundColor: Colors.red, 
+                        )
+                      );
+                    }
+
+                  }
                 }
                  )
                   ],
@@ -99,3 +130,4 @@ class _NoteBackScreen extends StatelessWidget {
          );
   }
 }
+
