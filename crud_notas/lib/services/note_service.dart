@@ -86,6 +86,20 @@ notes.id = decodedData['title'];
 return notes.id;
  }
 
+ Future<String> deleteNote (Notes notes) async {
+    // Database database = await _openDB();
+    // return database.delete("notes", where: 'id = ?', whereArgs: [note.id]);
+  // return _db.collection('jobs').document(note).delete();
+ final url = Uri.https(_baseUrl, 'notas.json');
+ final resp = await http.delete(url, body:notes.toJson() );
+ final decodedData = json.decode(resp.body);
+
+notes.id = decodedData['title'];
+  // this.notes.add(notes);
+
+  return notes.id!;
+ 
+  }
 
 }
 

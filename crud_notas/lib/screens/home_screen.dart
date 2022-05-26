@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:crud_notas/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/screens/loading_screen.dart';
@@ -11,11 +13,11 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
 
+  List<Notes> notes = [];  
 
   @override
   Widget build(BuildContext context) {
-
-
+  final Notes notes;
   final notesService = Provider.of<NotesService>(context);
   final authservice = Provider.of<Authservice>(context, listen: false);
 
@@ -44,7 +46,7 @@ class HomeScreen extends StatelessWidget {
           onTap: (){
             notesService.selectedNote = notesService.notes[index].copy();
             Navigator.pushNamed(context, 'note');
-            _DeleteNote();
+            _DeleteNote(index);
           },
           child: _NotesCard(
             note:notesService.notes[index],
@@ -84,8 +86,17 @@ class HomeScreen extends StatelessWidget {
     
       onDismissed: (direction) {
         print(direction);
-        Operation.delete(notes[i]);
-      }, 
+        NotesService.deleteNote(notes[i]);
+      }, child:  ListTile(
+        title: Text(notes[i].title),
+        trailing: MaterialButton(
+          onPressed: (){
+            // Navigator.pushNamed(context, SavePage.ROUTE,arguments: notes[i]);
+          deleteNote(notes.id);
+                 Navigator.pop(context);
+          },
+          child: Icon(Icons.edit)),
+      ),
     );
  }
 }
