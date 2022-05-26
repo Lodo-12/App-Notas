@@ -44,6 +44,7 @@ class HomeScreen extends StatelessWidget {
           onTap: (){
             notesService.selectedNote = notesService.notes[index].copy();
             Navigator.pushNamed(context, 'note');
+            _DeleteNote();
           },
           child: _NotesCard(
             note:notesService.notes[index],
@@ -54,6 +55,10 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white10,
         onPressed: () { 
              
+             notesService.selectedNote = new Notes(
+               description: '',
+                title: '');
+
             Navigator.pushNamed(context, 'note');
          },
         child: Icon(
@@ -61,11 +66,29 @@ class HomeScreen extends StatelessWidget {
            size: 30, 
            color: Colors.white),
       ),
-      
+
       );
   }
+  _DeleteNote(int i) {
+    return Dismissible(
+      key: Key(i.toString()),
+      direction: DismissDirection.startToEnd,
+      background: Container(
+        color: Colors.red,
+        padding: EdgeInsets.only(left: 5),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Icon(Icons.delete, color: Colors.white),
+        ),
+      ),
+    
+      onDismissed: (direction) {
+        print(direction);
+        Operation.delete(notes[i]);
+      }, 
+    );
+ }
 }
-
 class _NotesCard extends StatelessWidget {
   
   final Notes note;
@@ -102,3 +125,4 @@ class _NotesCard extends StatelessWidget {
     );
   }
 }
+

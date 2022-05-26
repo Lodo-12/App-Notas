@@ -74,16 +74,16 @@ Future<String> updateNote (Notes notes) async {
 return notes.id!;
 }
 
-Future<String> createNote (Notes notes) async {
+Future<String?> createNote (Notes notes) async {
 
  final url = Uri.https(_baseUrl, 'notas.json');
  final resp = await http.post(url, body:notes.toJson() );
  final decodedData = json.decode(resp.body);
 
-notes.id = decodedData['id'];
-  this.notes.add(notes);
+notes.id = decodedData['title'];
+  // this.notes.add(notes);
 
-return notes.id!;
+return notes.id;
  }
 
 

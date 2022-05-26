@@ -37,7 +37,7 @@ class _NoteBackScreen extends StatelessWidget {
     final note = notesForm.note;
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 238, 231, 18),
+      backgroundColor: Color.fromARGB(255, 177, 141, 74),
       appBar: AppBar(
         title: Text('Notas', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
         centerTitle: true,
@@ -81,6 +81,8 @@ class _NoteBackScreen extends StatelessWidget {
                     hintText: 'Descripcion',
                     labelText: 'Descripcion:'
                     ),
+
+                  // _deleteNote,    
                 ),
               //  NoteCard(notes: null,),
                 TextButton(
@@ -107,8 +109,37 @@ class _NoteBackScreen extends StatelessWidget {
          
          );
   }
-  
+  // _deleteNote(int index) async {
+  //         return Dismissible(
+  //           key: notesForm.formKey,
+  //           direction: DismissDirection.startToEnd,
+  //           onDismissed: (direction){
+  //             print(direction);
+  //           },
+  //            child: ListTile(
+  //              title: Text(notes.title),
+  //              ),)
+  //       }   
+   
 }
   
+  //  class _deletedNote extends StatelessWidget {
+
+  //  final notesForm = Provider.of<NoteFormProvider>(context);
+  //   final note = notesForm.note;
+
+  //    @override
+  //    Widget build(BuildContext context) {
+  //      return Dismissible(
+  //           key: notesForm.formKey,
+  //           direction: DismissDirection.startToEnd,
+  //           onDismissed: (direction){
+  //             print(direction);
+  //           },
+  //            child: ListTile(
+  //              title: Text(notes.title),
+  //              ),)
+  //    }
+  //  }     
   
 

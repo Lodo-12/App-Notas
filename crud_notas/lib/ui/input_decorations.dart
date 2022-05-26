@@ -23,10 +23,10 @@ class InputDecorations {
         hintText: hintText,
         labelText: labelText,
         labelStyle: TextStyle(
-          color: Colors.grey
+          color: Color.fromARGB(255, 243, 243, 243)
         ),
         prefixIcon: prefixIcon != null 
-          ? Icon( prefixIcon, color: Colors.black45 )
+          ? Icon( prefixIcon, color: Color.fromARGB(115, 245, 245, 245) )
           : null
       );
   }  
