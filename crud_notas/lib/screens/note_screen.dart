@@ -37,9 +37,9 @@ class _NoteBackScreen extends StatelessWidget {
     final note = notesForm.note;
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 38, 24, 18),
+      backgroundColor: Color.fromARGB(255, 238, 231, 18),
       appBar: AppBar(
-        title: Text('Notas'),
+        title: Text('Notas', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -60,7 +60,7 @@ class _NoteBackScreen extends StatelessWidget {
                   onChanged: (value)=> note.title = value,
                   validator: (value) {
                     if( value == null || value.length < 1)
-                    return 'El titulo es obligatorio';
+                    return 'No has puesto nada';
                   },
                   decoration: InputDecorations.authInputDecoration(
                     hintText: 'Titulo',
@@ -75,15 +75,30 @@ class _NoteBackScreen extends StatelessWidget {
                   onChanged: (value)=> note.description = value,
                   validator: (value) {
                     if( value == null || value.length < 1)
-                    return 'La descripcion es obligatoria';
+                    return 'No has puesto nada';
                   },
                   decoration: InputDecorations.authInputDecoration(
                     hintText: 'Descripcion',
                     labelText: 'Descripcion:'
                     ),
-                )
+                ),
               //  NoteCard(notes: null,),
+                TextButton(
+                   child: 
+                      // ? CircularProgressIndicator( color: Colors.white,)
+                       Text('Add note', style:TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 255, 255, 255))
+                     ),
+                    onPressed: ()async{
+                    
+                    if( !notesForm.isValidForm()) return;
 
+                    await noteService.saveOrCreateNote(notesForm.note);
+                      
+                    }
+                     )
 
                   ],
               ),

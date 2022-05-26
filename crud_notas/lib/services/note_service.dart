@@ -11,6 +11,7 @@ class NotesService extends ChangeNotifier{
   late Notes? selectedNote;
 
   bool isLoading = true;
+  bool isSaving = false;
 
   NotesService(){
       this.loadProducts();
@@ -40,6 +41,51 @@ Future<List<Notes>> loadProducts() async{
   return this.notes;
 
   }
+
+  Future saveOrCreateNote( Notes notes) async{
+
+  isSaving= true;
+  notifyListeners();
+
+  if( notes.id == null){
+
+    await this.createNote(notes);
+  } else{
+
+    await this.updateNote(notes);
+
+  }
+
+  isSaving= false;
+  notifyListeners();
+
+}
+
+Future<String> updateNote (Notes notes) async {
+
+ final url = Uri.https(_baseUrl, 'notas/${ notes.id}.json');
+ final resp = await http.put(url, body:notes.toJson() );
+ final decodedData = resp.body;
+
+
+  final index = this.notes.indexWhere((element) => element.id ==notes.id);
+  this.notes[index] = notes;
+
+return notes.id!;
+}
+
+Future<String> createNote (Notes notes) async {
+
+ final url = Uri.https(_baseUrl, 'notas.json');
+ final resp = await http.post(url, body:notes.toJson() );
+ final decodedData = json.decode(resp.body);
+
+notes.id = decodedData['id'];
+  this.notes.add(notes);
+
+return notes.id!;
+ }
+
 
 }
 

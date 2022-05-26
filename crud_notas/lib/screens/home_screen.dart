@@ -1,5 +1,6 @@
-import 'package:crud_notas/screens/loading_screen.dart';
+import 'package:crud_notas/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:crud_notas/screens/loading_screen.dart';
 import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/screens/screens.dart';
 import 'package:crud_notas/services/note_service.dart';
@@ -16,26 +17,26 @@ class HomeScreen extends StatelessWidget {
 
 
   final notesService = Provider.of<NotesService>(context);
+  final authservice = Provider.of<Authservice>(context, listen: false);
+
   if( notesService.isLoading) return LoadingScreen();
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 38, 24, 18),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white10,
-        onPressed: () { 
-             
-            Navigator.pushNamed(context, 'note');
-         },
-        child: Icon(
-           CupertinoIcons.add,
-           size: 30, 
-           color: Colors.white),
-      ),
       appBar: AppBar(
         title: Text('Notas'),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
+        leading: IconButton(
+           icon: Icon(Icons.login_outlined),
+           onPressed: (){
+
+             authservice.logout();
+             Navigator.pushReplacementNamed(context, 'login');
+
+           }
+           ),
       ),
       body: ListView.builder(
         itemCount: notesService.notes.length,
@@ -48,7 +49,18 @@ class HomeScreen extends StatelessWidget {
             note:notesService.notes[index],
           )
             ),
-          )
+          ),
+           floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white10,
+        onPressed: () { 
+             
+            Navigator.pushNamed(context, 'note');
+         },
+        child: Icon(
+           CupertinoIcons.add,
+           size: 30, 
+           color: Colors.white),
+      ),
       
       );
   }
