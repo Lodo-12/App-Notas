@@ -43,9 +43,23 @@ class _NoteBackScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
+        leading: ListView.builder(
+           itemBuilder: (BuildContext context, int index)=>GestureDetector(
+             onTap: () {
+            IconButton(
+             color: Colors.red,
+             icon: Icon(CupertinoIcons.trash),
+             onPressed: () {
+              noteService.deleteNote(noteService.notes[index]);
+              Navigator.pop(context);
+             }
+            );
+          },
+        ),
       ),
+    ),
         body:
-         Padding(padding: EdgeInsets.all(15),
+         Padding(paddinsg: EdgeInsets.all(15),
          child: Form(
            key: notesForm.formKey,
            autovalidateMode: AutovalidateMode.onUserInteraction,

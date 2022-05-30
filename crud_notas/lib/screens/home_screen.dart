@@ -46,7 +46,6 @@ class HomeScreen extends StatelessWidget {
           onTap: (){
             notesService.selectedNote = notesService.notes[index].copy();
             Navigator.pushNamed(context, 'note');
-            _DeleteNote(index);
           },
           child: _NotesCard(
             note:notesService.notes[index],
@@ -71,34 +70,7 @@ class HomeScreen extends StatelessWidget {
 
       );
   }
-  _DeleteNote(int i) {
-    return Dismissible(
-      key: Key(i.toString()),
-      direction: DismissDirection.startToEnd,
-      background: Container(
-        color: Colors.red,
-        padding: EdgeInsets.only(left: 5),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Icon(Icons.delete, color: Colors.white),
-        ),
-      ),
-    
-      onDismissed: (direction) {
-        print(direction);
-        NotesService.deleteNote(notes[i]);
-      }, child:  ListTile(
-        title: Text(notes[i].title),
-        trailing: MaterialButton(
-          onPressed: (){
-            // Navigator.pushNamed(context, SavePage.ROUTE,arguments: notes[i]);
-          deleteNote(notes.id);
-                 Navigator.pop(context);
-          },
-          child: Icon(Icons.edit)),
-      ),
-    );
- }
+
 }
 class _NotesCard extends StatelessWidget {
   
