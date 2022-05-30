@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/ui/input_decorations.dart';
 import 'package:crud_notas/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
@@ -59,7 +59,7 @@ class _NoteBackScreen extends StatelessWidget {
       ),
     ),
         body:
-         Padding(paddinsg: EdgeInsets.all(15),
+         Padding(padding: EdgeInsets.all(15),
          child: Form(
            key: notesForm.formKey,
            autovalidateMode: AutovalidateMode.onUserInteraction,
