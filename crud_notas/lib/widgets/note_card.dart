@@ -65,10 +65,6 @@ class _NotesDetails extends StatelessWidget {
                          return 'No has puesto nada';
                        }
                      },
-                    //  initialValue: notes.title,
-                    //  onChanged: (value) {
-                    //    notes.title = value;
-                    //  },
                    ),
                     Expanded(
                       child: TextFormField(
@@ -83,10 +79,6 @@ class _NotesDetails extends StatelessWidget {
                          return 'No has puesto nada';
                        }
                      },
-                      // initialValue: notes.description,
-                      //  onChanged: (value){
-                      //    notes.description = value;
-                      //  },
                       )      
                     ),
                   // ignore: deprecated_member_use

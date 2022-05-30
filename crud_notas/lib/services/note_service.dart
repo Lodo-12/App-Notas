@@ -12,6 +12,7 @@ class NotesService extends ChangeNotifier{
 
   bool isLoading = true;
   bool isSaving = false;
+  bool delete = false;
 
   NotesService(){
       this.loadProducts();
@@ -27,7 +28,7 @@ Future<List<Notes>> loadProducts() async{
 
   final resp = await http.get(url);
 
-  final Map<String, dynamic> notesMap = jsonDecode(resp.body);
+  final Map<String, dynamic> notesMap = json.decode(resp.body);
 
   notesMap.forEach((key, value) {
     
@@ -86,17 +87,15 @@ notes.id = decodedData['title'];
 return notes.id;
  }
 
- Future<String> deleteNote (Notes notes) async {
-    // Database database = await _openDB();
-    // return database.delete("notes", where: 'id = ?', whereArgs: [note.id]);
-  // return _db.collection('jobs').document(note).delete();
- final url = Uri.https(_baseUrl, 'notas.json');
- final resp = await http.delete(url, body:notes.toJson() );
+  Future<String> deleteNote (Notes notes) async {
+
+ final url = Uri.https(_baseUrl, 'notas/${ notes.id}.json');
+ final resp = await http.delete(url);
  final decodedData = json.decode(resp.body);
 
 notes.id = decodedData['title'];
-  // this.notes.add(notes);
 
+notifyListeners();
   return notes.id!;
  
   }

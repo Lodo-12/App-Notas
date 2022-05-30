@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 
@@ -43,6 +44,21 @@ class _NoteBackScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
+         leading: ListView.builder(
+           itemBuilder: (BuildContext context, int index)=>GestureDetector(
+             onTap: () {
+            IconButton(
+             color: Colors.red,
+             icon: Icon(CupertinoIcons.trash),
+             onPressed: () {
+              noteService.deleteNote(noteService.notes[index]);
+              Navigator.pop(context);
+             }
+            );
+               
+             },
+           ),
+         ),
       ),
         body:
          Padding(padding: EdgeInsets.all(15),
@@ -82,9 +98,7 @@ class _NoteBackScreen extends StatelessWidget {
                     labelText: 'Descripcion:'
                     ),
 
-                  // _deleteNote,    
                 ),
-              //  NoteCard(notes: null,),
                 TextButton(
                    child: 
                       // ? CircularProgressIndicator( color: Colors.white,)
@@ -109,37 +123,7 @@ class _NoteBackScreen extends StatelessWidget {
          
          );
   }
-  // _deleteNote(int index) async {
-  //         return Dismissible(
-  //           key: notesForm.formKey,
-  //           direction: DismissDirection.startToEnd,
-  //           onDismissed: (direction){
-  //             print(direction);
-  //           },
-  //            child: ListTile(
-  //              title: Text(notes.title),
-  //              ),)
-  //       }   
-   
 }
-  
-  //  class _deletedNote extends StatelessWidget {
 
-  //  final notesForm = Provider.of<NoteFormProvider>(context);
-  //   final note = notesForm.note;
-
-  //    @override
-  //    Widget build(BuildContext context) {
-  //      return Dismissible(
-  //           key: notesForm.formKey,
-  //           direction: DismissDirection.startToEnd,
-  //           onDismissed: (direction){
-  //             print(direction);
-  //           },
-  //            child: ListTile(
-  //              title: Text(notes.title),
-  //              ),)
-  //    }
-  //  }     
   
 
