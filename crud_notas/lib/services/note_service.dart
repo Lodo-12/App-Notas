@@ -93,14 +93,11 @@ final url = Uri.https(_baseUrl, 'notas/${ notes.id}.json');
  final resp = await http.delete(url);
  final decodedData = json.decode(resp.body);
 
-notes.id = decodedData['title'];
-  // this.notes.add(notes);
-
 notifyListeners();
   return notes.id!;
  
   }
-  
+
   Future<void> refreshNotes() {
     final duracion = Duration(seconds: 1);
  

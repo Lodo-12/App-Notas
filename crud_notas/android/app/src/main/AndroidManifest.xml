@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.crud_notas">
+    package="com.lodo.crud_notas">
    <application
         android:label="crud_notas"
         android:name="${applicationName}"
