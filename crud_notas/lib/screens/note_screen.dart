@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 
@@ -39,24 +40,29 @@ class _NoteBackScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 177, 141, 74),
       appBar: AppBar(
-        title: Text('Notas', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
+        title: Text('Nota', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: ListView.builder(
-           itemBuilder: (BuildContext context, int index)=>GestureDetector(
-             onTap: () {
-            IconButton(
-             color: Colors.red,
-             icon: Icon(CupertinoIcons.trash),
-             onPressed: () {
-              noteService.deleteNote(noteService.notes[index]);
-              Navigator.pop(context);
-             }
-            );
-          },
+        leading: SizedBox(
+          height: 10,
+          width: 10,
+          child: ListView.builder(
+              itemCount: noteService.notes.length,
+               itemBuilder: (BuildContext context, int index)=>GestureDetector(
+                 onTap: () {
+                
+                
+                  noteService.deleteNote(noteService.notes[index]);
+                  Navigator.pop(context);
+                 }, 
+                child: Icon(
+                CupertinoIcons.trash,
+                 color: Colors.red,
+                ),
+            ),
+              ),
         ),
-      ),
     ),
         body:
          Padding(padding: EdgeInsets.all(15),
@@ -95,8 +101,6 @@ class _NoteBackScreen extends StatelessWidget {
                     hintText: 'Descripcion',
                     labelText: 'Descripcion:'
                     ),
-
-                  // _deleteNote,    
                 ),
               //  NoteCard(notes: null,),
                 TextButton(
@@ -123,37 +127,54 @@ class _NoteBackScreen extends StatelessWidget {
          
          );
   }
-  // _deleteNote(int index) async {
-  //         return Dismissible(
-  //           key: notesForm.formKey,
-  //           direction: DismissDirection.startToEnd,
-  //           onDismissed: (direction){
-  //             print(direction);
-  //           },
-  //            child: ListTile(
-  //              title: Text(notes.title),
-  //              ),)
-  //       }   
    
 }
-  
-  //  class _deletedNote extends StatelessWidget {
 
-  //  final notesForm = Provider.of<NoteFormProvider>(context);
-  //   final note = notesForm.note;
+// class _DeleteButton extends StatelessWidget {
 
-  //    @override
-  //    Widget build(BuildContext context) {
-  //      return Dismissible(
-  //           key: notesForm.formKey,
-  //           direction: DismissDirection.startToEnd,
-  //           onDismissed: (direction){
-  //             print(direction);
-  //           },
-  //            child: ListTile(
-  //              title: Text(notes.title),
-  //              ),)
-  //    }
-  //  }     
-  
 
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {
+
+//            onPressed: () {
+//             // noteService.deleteNote(noteService.notes[]);
+//             Navigator.pop(context);
+//            };
+//       }
+//     ),
+//       child:IconButton(
+//            color: Colors.red,
+//            icon: Icon(CupertinoIcons.trash),
+//     );
+//   }
+// }
+
+// class _DeleteButton extends StatelessWidget {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//   final noteService = Provider.of<NotesService>(context);
+//    final notesForm = Provider.of<NoteFormProvider>(context);
+//     final note = notesForm.note;
+
+//     return  ListView.builder(
+//             itemCount: noteService.notes.length,
+//              itemBuilder: (BuildContext context, int index)=>GestureDetector(
+//                onTap: () {
+//               IconButton(
+//                color: Colors.red,
+//                icon: Icon(CupertinoIcons.trash),
+//                onPressed: () {
+//                 noteService.deleteNote(noteService.notes[index]);
+//                 Navigator.pop(context);
+//                }
+//               );
+//             },
+//           ),
+//       );
+// }
+// }

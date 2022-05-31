@@ -27,7 +27,7 @@ Future<List<Notes>> loadProducts() async{
 
   final resp = await http.get(url);
 
-  final Map<String, dynamic> notesMap = jsonDecode(resp.body);
+  final Map<String, dynamic> notesMap = json.decode(resp.body);
 
   notesMap.forEach((key, value) {
     
