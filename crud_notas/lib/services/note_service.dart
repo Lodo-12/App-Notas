@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -98,6 +99,17 @@ notes.id = decodedData['title'];
 notifyListeners();
   return notes.id!;
  
+  }
+  
+  Future<void> refreshNotes() {
+    final duracion = Duration(seconds: 1);
+ 
+    Timer(duracion, () {
+      notes.clear();
+      loadProducts();
+    });
+    // print('cuanto dura ${duracion}');
+    return Future.delayed(duracion);
   }
 
 }

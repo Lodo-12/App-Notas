@@ -44,14 +44,14 @@ class _NoteBackScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: SizedBox(
+        actions: [ SizedBox(
           height: 10,
-          width: 10,
+          width: 50,
           child: ListView.builder(
-              itemCount: noteService.notes.length,
+            padding: EdgeInsets.only(top: 15),
+            itemCount: 1,
                itemBuilder: (BuildContext context, int index)=>GestureDetector(
                  onTap: () {
-                
                 
                   noteService.deleteNote(noteService.notes[index]);
                   Navigator.pop(context);
@@ -63,6 +63,8 @@ class _NoteBackScreen extends StatelessWidget {
             ),
               ),
         ),
+        
+        ]
     ),
         body:
          Padding(padding: EdgeInsets.all(15),

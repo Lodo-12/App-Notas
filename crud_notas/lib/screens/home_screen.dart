@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:crud_notas/services/services.dart';
 import 'package:crud_notas/screens/loading_screen.dart';
 import 'package:crud_notas/models/notes.dart';
-import 'package:crud_notas/screens/screens.dart';
-import 'package:crud_notas/services/note_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +35,12 @@ class HomeScreen extends StatelessWidget {
 
            }
            ),
+           actions: [
+             IconButton(onPressed: (() {
+               Navigator.pushNamed(context, 'home');
+             }),
+              icon: Icon(CupertinoIcons.refresh))
+           ],
       ),
       body: ListView.builder(
         itemCount: notesService.notes.length,
