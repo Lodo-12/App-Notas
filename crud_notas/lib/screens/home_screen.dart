@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   if( notesService.isLoading) return LoadingScreen();
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 38, 24, 18),
+      backgroundColor: Color.fromARGB(255, 177, 141, 74),
       appBar: AppBar(
         title: Text('Notas'),
         centerTitle: true,

@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Notas App',
      initialRoute: 'login',
+     
      routes: {
        'login': (_) => LoginScreen(),
        'register': (_) => RegisterScreen(),
