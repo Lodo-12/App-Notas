@@ -6,7 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class Authservice extends ChangeNotifier{
 
   final String _baseUrl = 'identitytoolkit.googleapis.com';
-  final String _firebaseToken = 'AIzaSyAeZraqonoa7FFlYHZMoYs7vfzaMSq7He0';
+  final String _firebaseToken = 'AIzaSyBqzainM6wf03yHIac-M4lLUHdYzSWkLu8';
 
   final storage = new FlutterSecureStorage();
 

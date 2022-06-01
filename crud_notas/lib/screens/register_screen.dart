@@ -60,6 +60,7 @@ class _LoginForm extends StatelessWidget {
               hintText: 'ejemplo@gmail.com',
               labelText: 'Correo Electronico',
               prefixIcon: Icons.alternate_email_rounded),
+          onChanged: (value) => loginForm.email = value,    
           validator: (value) {
             String pattern =
                 r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -91,9 +92,9 @@ class _LoginForm extends StatelessWidget {
         MaterialButton(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
+            disabledColor: Color.fromARGB(255, 0, 0, 0),
             elevation: 0,
-            color: Colors.deepPurple,
+            color: Color.fromARGB(255, 1, 1, 1),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: Text(
