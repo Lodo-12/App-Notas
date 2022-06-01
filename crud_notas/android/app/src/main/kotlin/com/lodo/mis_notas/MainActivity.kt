@@ -1,4 +1,4 @@
-package com.example.crud_notas
+package com.lodo.mis_notas
 
 import io.flutter.embedding.android.FlutterActivity
 

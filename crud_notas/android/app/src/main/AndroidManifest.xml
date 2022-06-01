@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lodo.crud_notas">
+    package="com.lodo.mis_notas">
    <application
-        android:label="crud_notas"
+        android:label="Mis Notas"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -31,4 +31,3 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-</manifest>
