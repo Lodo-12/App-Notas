@@ -60,7 +60,10 @@ class HomeScreen extends StatelessWidget {
              
              notesService.selectedNote = new Notes(
                description: '',
-                title: '');
+                title: '',
+                token: '',
+                );
+                
 
             Navigator.pushNamed(context, 'note');
          },
@@ -91,7 +94,15 @@ class _NotesCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         //CHOOSE COLOR OF NOTES
-        borderRadius: BorderRadius.circular(15)
+        borderRadius: BorderRadius.circular(15),
+         boxShadow: [
+            BoxShadow(
+              color: Colors.black54.withOpacity(0.5),
+              spreadRadius: 4,
+              blurRadius: 7,
+              offset: Offset(4, 7),
+            )
+         ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

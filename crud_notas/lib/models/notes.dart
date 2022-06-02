@@ -32,11 +32,13 @@ class Notes {
     Notes({
         required this.description,
         required this.title,
+        required this.token,
         this.id
     });
 
     String description;
     String title;
+    String token;
     String? id;
 
     factory Notes.fromJson(String str) => Notes.fromMap(json.decode(str));
@@ -46,17 +48,20 @@ class Notes {
     factory Notes.fromMap(Map<String, dynamic> json) => Notes(
         description: json["description"],
         title: json["title"],
+        token: json["token"]
     );
 
     Map<String, dynamic> toMap() => {
         "description": description,
         "title": title,
+        "token": token,
     };
 
     Notes copy() => Notes(
       title: this.title,
       description: this.description,
       id: this.id,
+      token: this.token
     );
 }
 

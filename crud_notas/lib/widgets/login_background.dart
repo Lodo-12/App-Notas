@@ -18,30 +18,12 @@ class LoginBackground extends StatelessWidget {
       child: Stack(
         children: [
           _BlackBox(),
-          // _HeaderIcon(),
           this.child,
         ],
       ),
     );
   }
 }
-
-// class _HeaderIcon extends StatelessWidget {
-//   const _HeaderIcon({
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Container(
-//         width: double.infinity,
-//         margin: EdgeInsetsDirectional.only(top: 30),
-//         child: Icon(Icons.person_pin, color: Colors.white, size: 100),
-//       ),
-//     );
-//   }
-// }
 
 class _BlackBox extends StatelessWidget {
   @override
