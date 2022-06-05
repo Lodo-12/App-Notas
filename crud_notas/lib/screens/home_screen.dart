@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
            ),
            actions: [
              IconButton(onPressed: (() {
-             notesService.refreshNotes();
+            //  notesService.refreshNotes();
              }),
               icon: Icon(CupertinoIcons.refresh))
            ],
