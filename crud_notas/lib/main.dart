@@ -1,5 +1,5 @@
-import 'package:crud_notas/screens/check_auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:crud_notas/screens/check_auth_screen.dart';
 import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/screens/home_screen.dart';
 import 'package:crud_notas/screens/screens.dart';

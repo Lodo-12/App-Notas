@@ -1,5 +1,5 @@
-import 'package:crud_notas/models/notes.dart';
 import 'package:flutter/material.dart';
+import 'package:crud_notas/models/notes.dart';
 
 class NoteFormProvider extends ChangeNotifier {
 

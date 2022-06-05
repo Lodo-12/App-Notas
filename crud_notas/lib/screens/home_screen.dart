@@ -61,7 +61,6 @@ class HomeScreen extends StatelessWidget {
              notesService.selectedNote = new Notes(
                description: '',
                 title: '',
-                token: '',
                 );
                 
 

@@ -28,7 +28,7 @@ class Authservice extends ChangeNotifier{
     if ( decodedResp.containsKey('idToken') ) {
         // Token hay que guardarlo en un lugar seguro
         await storage.write(key: 'token', value: decodedResp['idToken']);
-        // decodedResp['idToken'];
+        decodedResp['idToken'];
         return null;
     } else {
       return decodedResp['error']['message'];
@@ -73,8 +73,6 @@ class Authservice extends ChangeNotifier{
   Future <String> readToken() async{
 
     return await storage.read(key: 'token') ?? '';
-
   }
-
 
 }
