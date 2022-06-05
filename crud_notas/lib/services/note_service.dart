@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:crud_notas/models/models.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class NotesService extends ChangeNotifier{
@@ -10,6 +10,8 @@ class NotesService extends ChangeNotifier{
   final String _baseUrl = 'notasv4-default-rtdb.europe-west1.firebasedatabase.app';
   final List<Notes> notes =[];
   late Notes? selectedNote;
+
+  final storage = new FlutterSecureStorage();
 
   bool isLoading = true;
   bool isSaving = false;
@@ -24,7 +26,9 @@ Future<List<Notes>> loadProducts() async{
   this.isLoading = true;
   notifyListeners();
 
-  final url = Uri.https(_baseUrl, 'notas/.json');
+  final url = Uri.https(_baseUrl, 'notes.json',{
+    'auth': await storage.read(key: 'token') ?? ''
+  });
 
   final resp = await http.get(url);
 
@@ -64,7 +68,7 @@ Future<List<Notes>> loadProducts() async{
 
 Future<String> updateNote (Notes notes) async {
 
- final url = Uri.https(_baseUrl, 'notas/${ notes.id}.json');
+ final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
  final resp = await http.put(url, body:notes.toJson() );
  final decodedData = resp.body;
 
@@ -77,7 +81,7 @@ return notes.id!;
 
 Future<String?> createNote (Notes notes) async {
 
- final url = Uri.https(_baseUrl, 'notas.json');
+ final url = Uri.https(_baseUrl, 'notes.json');
  final resp = await http.post(url, body:notes.toJson() );
  final decodedData = json.decode(resp.body);
 
@@ -89,7 +93,7 @@ return notes.id;
 
  Future<String> deleteNote (Notes notes) async {
    
-final url = Uri.https(_baseUrl, 'notas/${ notes.id}.json');
+final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
  final resp = await http.delete(url);
  final decodedData = json.decode(resp.body);
 
