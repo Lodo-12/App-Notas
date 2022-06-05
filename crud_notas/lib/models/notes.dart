@@ -37,7 +37,6 @@ class Notes {
 
     String description;
     String title;
-    String? token;
     String? id;
 
     factory Notes.fromJson(String str) => Notes.fromMap(json.decode(str));

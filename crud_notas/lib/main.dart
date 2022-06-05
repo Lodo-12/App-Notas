@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:crud_notas/screens/check_auth_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/screens/home_screen.dart';
 import 'package:crud_notas/screens/screens.dart';
@@ -30,13 +30,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Notas App',
      initialRoute: 'login',
-
+     
      routes: {
-       'cheking':(context) => CheckAuthScreen(),
        'login': (_) => LoginScreen(),
        'register': (_) => RegisterScreen(),
        'home': (_) => HomeScreen(),
        'note': (_) => NoteScreen(),
+       'checking' : (_) => CheckAuthScreen(),
      },
     );
   }
