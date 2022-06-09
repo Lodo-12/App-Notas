@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Notas App',
-     initialRoute: 'login',
+     initialRoute: 'home',
      
      routes: {
        'login': (_) => LoginScreen(),
