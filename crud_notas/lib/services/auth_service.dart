@@ -7,7 +7,6 @@ class Authservice extends ChangeNotifier{
 
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseToken = 'AIzaSyBqzainM6wf03yHIac-M4lLUHdYzSWkLu8';
-
   final storage = new FlutterSecureStorage();
 
   Future<String?> createUser ( String email, String password) async{
@@ -34,9 +33,8 @@ class Authservice extends ChangeNotifier{
       return decodedResp['error']['message'];
     }
 
-
   }
-
+  
   Future<String?> login( String email, String password) async{
 
     final Map<String, dynamic> authData = {
@@ -59,7 +57,7 @@ class Authservice extends ChangeNotifier{
     } else {
       return decodedResp['error']['message'];
     }
-
+  
 
   }
 
@@ -71,8 +69,8 @@ class Authservice extends ChangeNotifier{
   }
 
   Future <String> readToken() async{
-
     return await storage.read(key: 'token') ?? '';
   }
 
-}
+ 
+ }

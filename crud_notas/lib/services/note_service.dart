@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:crud_notas/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/models/models.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class NotesService extends ChangeNotifier{
   
   final String _baseUrl = 'notasv4-default-rtdb.europe-west1.firebasedatabase.app';
   final List<Notes> notes =[];
+  
   late Notes? selectedNote;
 
   final storage = new FlutterSecureStorage();
@@ -17,20 +20,20 @@ class NotesService extends ChangeNotifier{
   bool isSaving = false;
 
   NotesService(){
-      this.loadProducts();
+      this.loadNotes();
     }
 
   
-Future<List<Notes>> loadProducts() async{
+Future<List<Notes>> loadNotes() async{
 
   this.isLoading = true;
   notifyListeners();
-
+  final authservice = Authservice;
   final url = Uri.https(_baseUrl, 'notes.json');
   final resp = await http.get(url);
 
   final Map<String, dynamic> notesMap = json.decode(resp.body);
-
+  
   notesMap.forEach((key, value) {
     
     final tempNote = Notes.fromMap(value);
@@ -72,7 +75,6 @@ Future<String> updateNote (Notes notes) async {
 
   final index = this.notes.indexWhere((element) => element.id ==notes.id);
   this.notes[index] = notes;
-
 return notes.id!;
 }
 
@@ -103,7 +105,7 @@ notifyListeners();
  
     Timer(duracion, () {
       notes.clear();
-      loadProducts();
+      loadNotes();
     });
     // print('cuanto dura ${duracion}');
     return Future.delayed(duracion);

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 
 class HomeScreen extends StatelessWidget {
-
+  
   List<Notes> notes = [];  
 
   @override
@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
            ),
            actions: [
              IconButton(onPressed: (() {
-            //  notesService.refreshNotes();
+             notesService.refreshNotes();
              }),
               icon: Icon(CupertinoIcons.refresh))
            ],
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
             Navigator.pushNamed(context, 'note');
           },
           child: _NotesCard(
-            note:notesService.notes[index],
+            note: notesService.notes[index],
           )
             ),
           ),
@@ -60,8 +60,9 @@ class HomeScreen extends StatelessWidget {
              
              notesService.selectedNote = new Notes(
                description: '',
-                title: '');
-
+                title: '', 
+                idToken: '',
+                );
             Navigator.pushNamed(context, 'note');
          },
         child: Icon(
@@ -77,13 +78,14 @@ class HomeScreen extends StatelessWidget {
 class _NotesCard extends StatelessWidget {
   
   final Notes note;
-
   const _NotesCard({
     super.key,
      required this.note});
 
   @override
   Widget build(BuildContext context) {
+
+  
     return Container(
       margin: EdgeInsets.all(15),
       padding: EdgeInsets.all(15),

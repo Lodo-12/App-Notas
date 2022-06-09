@@ -1,7 +1,6 @@
-import 'package:crud_notas/screens/home_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:crud_notas/screens/screens.dart';
 import 'package:crud_notas/services/auth_service.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
@@ -44,7 +43,6 @@ class CheckAuthScreen extends StatelessWidget {
 
         });
       }
-
           return Container();
         },
       )
