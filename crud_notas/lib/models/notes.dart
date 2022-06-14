@@ -8,12 +8,14 @@ class Notes {
     Notes({
         required this.description,
         required this.title,
-        this.id
+        this.id,
+        required this.userid
     });
 
     String description;
     String title;
     String? id;
+    String userid;
 
     factory Notes.fromJson(String str) => Notes.fromMap(json.decode(str));
 
@@ -21,18 +23,21 @@ class Notes {
 
     factory Notes.fromMap(Map<String, dynamic> json) => Notes(
         description: json["description"],
-        title: json["title"],
+        title: json["title"], 
+        userid: json["userid"],
     );
 
     Map<String, dynamic> toMap() => {
         "description": description,
         "title": title,
+        "userid": userid
     };
 
     Notes copy() => Notes(
       title: this.title,
       description: this.description,
       id: this.id,
+       userid: this.userid,
     );
 }
 

@@ -104,11 +104,13 @@ class _NoteBackScreen extends StatelessWidget {
                     labelText: 'Descripcion:'
                     ),
                 ),
+
+                
               //  NoteCard(notes: null,),
                 TextButton(
                    child: 
                       // ? CircularProgressIndicator( color: Colors.white,)
-                       Text('Add note', style:TextStyle(
+                       Text('save note', style:TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 255, 255, 255))

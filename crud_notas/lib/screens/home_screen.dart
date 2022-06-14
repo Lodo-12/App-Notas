@@ -1,24 +1,24 @@
+
 import 'package:flutter/material.dart';
-import 'package:crud_notas/services/services.dart';
-import 'package:crud_notas/screens/loading_screen.dart';
-import 'package:crud_notas/models/notes.dart';
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
 import 'package:crud_notas/models/models.dart';
+import 'package:crud_notas/models/notes.dart';
+import 'package:crud_notas/screens/loading_screen.dart';
+import 'package:crud_notas/services/services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 
 class HomeScreen extends StatelessWidget {
-
+  
   List<Notes> notes = [];  
 
   @override
   Widget build(BuildContext context) {
-  final Notes notes;
   final notesService = Provider.of<NotesService>(context);
   final authservice = Provider.of<Authservice>(context, listen: false);
-
   if( notesService.isLoading) return LoadingScreen();
-
+  userNotes(notesService, authservice);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 177, 141, 74),
       appBar: AppBar(
@@ -30,27 +30,30 @@ class HomeScreen extends StatelessWidget {
            icon: Icon(Icons.login_outlined),
            onPressed: (){
 
+
              authservice.logout();
              Navigator.pushReplacementNamed(context, 'login');
-
            }
            ),
            actions: [
              IconButton(onPressed: (() {
+              
+              notes.clear();
              notesService.refreshNotes();
+              // userNotes(notesService, authservice);
              }),
               icon: Icon(CupertinoIcons.refresh))
            ],
       ),
       body: ListView.builder(
-        itemCount: notesService.notes.length,
+        itemCount: notes.length,
        itemBuilder: (BuildContext context, int index)=>GestureDetector(
           onTap: (){
-            notesService.selectedNote = notesService.notes[index].copy();
+            notesService.selectedNote = notes[index].copy();
             Navigator.pushNamed(context, 'note');
           },
           child: _NotesCard(
-            note:notesService.notes[index],
+            note: notes[index], 
           )
             ),
           ),
@@ -60,8 +63,9 @@ class HomeScreen extends StatelessWidget {
              
              notesService.selectedNote = new Notes(
                description: '',
-                title: '');
-
+                title: '', 
+               userid: authservice.getUserId(),
+                );
             Navigator.pushNamed(context, 'note');
          },
         child: Icon(
@@ -73,17 +77,24 @@ class HomeScreen extends StatelessWidget {
       );
   }
 
+  void userNotes(NotesService notesService, Authservice authservice) {
+    notesService.notes.forEach((element) { if ( element.userid == authservice.getUserId()){
+      if(!notes.contains(element)){notes.add(element);}
+    } });
+  }
+
 }
 class _NotesCard extends StatelessWidget {
   
   final Notes note;
-
   const _NotesCard({
     super.key,
      required this.note});
 
   @override
   Widget build(BuildContext context) {
+
+  
     return Container(
       margin: EdgeInsets.all(15),
       padding: EdgeInsets.all(15),

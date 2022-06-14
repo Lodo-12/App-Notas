@@ -1,3 +1,5 @@
+import 'package:crud_notas/screens/home_screen.dart';
+import 'package:crud_notas/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -10,18 +12,17 @@ class NotesService extends ChangeNotifier{
   final String _baseUrl = 'notasv4-default-rtdb.europe-west1.firebasedatabase.app';
   final List<Notes> notes =[];
   late Notes? selectedNote;
-
   final storage = new FlutterSecureStorage();
 
   bool isLoading = true;
   bool isSaving = false;
 
   NotesService(){
-      this.loadProducts();
+      this.loadNotes();
     }
 
   
-Future<List<Notes>> loadProducts() async{
+Future<List<Notes>> loadNotes() async{
 
   this.isLoading = true;
   notifyListeners();
@@ -35,7 +36,7 @@ Future<List<Notes>> loadProducts() async{
   final Map<String, dynamic> notesMap = json.decode(resp.body);
 
   notesMap.forEach((key, value) {
-    
+
     final tempNote = Notes.fromMap(value);
     tempNote.id = key;
     this.notes.add(tempNote);
@@ -86,7 +87,6 @@ Future<String?> createNote (Notes notes) async {
  final decodedData = json.decode(resp.body);
 
 notes.id = decodedData['title'];
-  // this.notes.add(notes);
 
 return notes.id;
  }
@@ -104,12 +104,13 @@ notifyListeners();
 
   Future<void> refreshNotes() {
     final duracion = Duration(seconds: 1);
- 
     Timer(duracion, () {
-      notes.clear();
-      loadProducts();
+       notes.clear();
+
+       loadNotes();
+      // loadNotes();
     });
-    // print('cuanto dura ${duracion}');
+
     return Future.delayed(duracion);
   }
 
