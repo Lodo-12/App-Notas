@@ -93,8 +93,9 @@ return notes.id;
 
  Future<String> deleteNote (Notes notes) async {
    
-final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
- final resp = await http.delete(url);
+   
+ final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
+ final resp = await http.delete(url, body:notes.toJson() );
  final decodedData = json.decode(resp.body);
 
 notifyListeners();
@@ -105,10 +106,8 @@ notifyListeners();
   Future<void> refreshNotes() {
     final duracion = Duration(seconds: 1);
     Timer(duracion, () {
-       notes.clear();
-
+      notes.clear();
        loadNotes();
-      // loadNotes();
     });
 
     return Future.delayed(duracion);

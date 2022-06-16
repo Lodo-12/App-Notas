@@ -1,4 +1,4 @@
-package com.lodo.mis_notas
+package com.lodo.notas
 
 import io.flutter.embedding.android.FlutterActivity
 

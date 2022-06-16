@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/ui/input_decorations.dart';
-import 'package:crud_notas/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:crud_notas/models/models.dart';
-import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 

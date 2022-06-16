@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lodo.mis_notas">
+    package="com.lodo.notas">
    <application
-        android:label="Mis Notas"
+        android:label="notas"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
