@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
        'register': (_) => RegisterScreen(),
        'home': (_) => HomeScreen(),
        'note': (_) => NoteScreen(),
+       'edit': (_) => NoteModifScreen(),
        'checking' : (_) => CheckAuthScreen(),
      },
     );

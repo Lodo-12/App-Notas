@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:crud_notas/models/models.dart';
 import 'package:crud_notas/models/notes.dart';
 import 'package:crud_notas/screens/loading_screen.dart';
@@ -9,8 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 
+
 class HomeScreen extends StatelessWidget {
   
+  bool isLoading = true;
   List<Notes> notes = [];  
 
   @override
@@ -36,13 +37,13 @@ class HomeScreen extends StatelessWidget {
            }
            ),
            actions: [
-             IconButton(onPressed: (() {
-              
+             RawMaterialButton(
+              onPressed: () {
+              LoadingScreen();
               notes.clear();
              notesService.refreshNotes();
-              // userNotes(notesService, authservice);
-             }),
-              icon: Icon(CupertinoIcons.refresh))
+             },
+              child: Icon(CupertinoIcons.refresh))
            ],
       ),
       body: ListView.builder(
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
        itemBuilder: (BuildContext context, int index)=>GestureDetector(
           onTap: (){
             notesService.selectedNote = notes[index].copy();
-            Navigator.pushNamed(context, 'note');
+            Navigator.pushNamed(context, 'edit');
           },
           child: _NotesCard(
             note: notes[index], 

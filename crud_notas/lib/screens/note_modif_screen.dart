@@ -6,7 +6,7 @@ import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:provider/provider.dart';
 
 
-class NoteScreen extends StatelessWidget {
+class NoteModifScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -40,27 +40,27 @@ class _NoteBackScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        // actions: [ SizedBox(
-        //   height: 10,
-        //   width: 50,
-        //   child: 
-        //   // ListView.builder(
-        // //     padding: EdgeInsets.only(top: 15),
-        // //     itemCount: 1,
-        // //        itemBuilder: (BuildContext context, int index)=>GestureDetector(
-        // //          onTap: () {
+        actions: [ SizedBox(
+          height: 10,
+          width: 50,
+          child: ListView.builder(
+            padding: EdgeInsets.only(top: 15),
+            itemCount: 1,
+               itemBuilder: (BuildContext context, int index)=>GestureDetector(
+                 onTap: () {
                 
-        // //           noteService.deleteNote(noteService.notes[index]);
-        // //           Navigator.pop(context);
-        // //          }, 
-        // //         child: Icon(
-        // //         CupertinoIcons.trash,
-        // //          color: Colors.red,
-        // //         ),
-        // //     ),
-        // //       ),
-        // // ),
-        // ]
+                  noteService.deleteNote(noteService.notes[index]);
+                  Navigator.pop(context);
+                 }, 
+                child: Icon(
+                CupertinoIcons.trash,
+                 color: Colors.red,
+                ),
+            ),
+              ),
+        ),
+        
+        ]
     ),
         body:
          Padding(padding: EdgeInsets.all(15),
@@ -102,6 +102,7 @@ class _NoteBackScreen extends StatelessWidget {
                 ),
 
                 
+              //  NoteCard(notes: null,),
                 TextButton(
                    child: 
                       // ? CircularProgressIndicator( color: Colors.white,)
@@ -111,8 +112,6 @@ class _NoteBackScreen extends StatelessWidget {
                         color: Color.fromARGB(255, 255, 255, 255))
                      ),
                     onPressed: ()async{
-
-                      Navigator.pop(context);
                     
                     if( !notesForm.isValidForm()) return;
 
@@ -130,3 +129,52 @@ class _NoteBackScreen extends StatelessWidget {
   }
    
 }
+
+// class _DeleteButton extends StatelessWidget {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {
+
+//            onPressed: () {
+//             // noteService.deleteNote(noteService.notes[]);
+//             Navigator.pop(context);
+//            };
+//       }
+//     ),
+//       child:IconButton(
+//            color: Colors.red,
+//            icon: Icon(CupertinoIcons.trash),
+//     );
+//   }
+// }
+
+// class _DeleteButton extends StatelessWidget {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//   final noteService = Provider.of<NotesService>(context);
+//    final notesForm = Provider.of<NoteFormProvider>(context);
+//     final note = notesForm.note;
+
+//     return  ListView.builder(
+//             itemCount: noteService.notes.length,
+//              itemBuilder: (BuildContext context, int index)=>GestureDetector(
+//                onTap: () {
+//               IconButton(
+//                color: Colors.red,
+//                icon: Icon(CupertinoIcons.trash),
+//                onPressed: () {
+//                 noteService.deleteNote(noteService.notes[index]);
+//                 Navigator.pop(context);
+//                }
+//               );
+//             },
+//           ),
+//       );
+// }
+// }
