@@ -17,7 +17,7 @@ class NotesService extends ChangeNotifier{
   bool isLoading = true;
   bool isSaving = false;
 
-  NotesService(){
+    NotesService(){
       this.loadNotes();
     }
 
@@ -39,10 +39,10 @@ Future<List<Notes>> loadNotes() async{
 
     final tempNote = Notes.fromMap(value);
     tempNote.id = key;
-    this.notes.add(tempNote);
+    notes.add(tempNote);
   });
 
-  this.isLoading = false;
+  isLoading = false;
   notifyListeners();
   return this.notes;
 
@@ -93,12 +93,14 @@ return notes.id;
 
  Future<String> deleteNote (Notes notes) async {
    
-   
+  isSaving= true;
+  notifyListeners();
  final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
- final resp = await http.delete(url, body:notes.toJson() );
+ final resp = await http.delete(url, body:notes.toJson());
  final decodedData = json.decode(resp.body);
 
-notifyListeners();
+  isSaving= false;
+  notifyListeners();
   return notes.id!;
  
   }

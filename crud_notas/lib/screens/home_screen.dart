@@ -14,13 +14,14 @@ class HomeScreen extends StatelessWidget {
   bool isLoading = true;
   List<Notes> notes = [];  
 
+
   @override
   Widget build(BuildContext context) {
   final notesService = Provider.of<NotesService>(context);
   final authservice = Provider.of<Authservice>(context, listen: false);
   if( notesService.isLoading) return LoadingScreen();
   userNotes(notesService, authservice);
-    return Scaffold(
+      return Scaffold(
       backgroundColor: Color.fromARGB(255, 177, 141, 74),
       appBar: AppBar(
         title: Text('Notas'),
@@ -30,18 +31,36 @@ class HomeScreen extends StatelessWidget {
         leading: IconButton(
            icon: Icon(Icons.login_outlined),
            onPressed: (){
+            showDialog(
+              context: context,
+               builder: (context) => AlertDialog(
+                title: Text('¿Quieres salir?'),
+                actions: [
+                  TextButton(
+                   child: Text('CANCEL'),
+                   onPressed: () => Navigator.pop(context),
+                  ),
+                  TextButton(
+                   child: Text('OK'),
+                   onPressed: () {
+                    authservice.logout();
+                    Navigator.pushReplacementNamed(context, 'login');
+                   } ,
+                  )                     
+                ],
+               )
+               );
+               
 
-
-             authservice.logout();
-             Navigator.pushReplacementNamed(context, 'login');
+             
            }
            ),
            actions: [
              RawMaterialButton(
               onPressed: () {
-              LoadingScreen();
+                Navigator.pushNamed(context, 'loading');
               notes.clear();
-             notesService.refreshNotes();
+              notesService.refreshNotes();
              },
               child: Icon(CupertinoIcons.refresh))
            ],
