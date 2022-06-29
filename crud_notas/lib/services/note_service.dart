@@ -17,7 +17,7 @@ class NotesService extends ChangeNotifier{
   bool isLoading = true;
   bool isSaving = false;
 
-    NotesService(){
+  NotesService(){
       this.loadNotes();
     }
 
@@ -39,10 +39,10 @@ Future<List<Notes>> loadNotes() async{
 
     final tempNote = Notes.fromMap(value);
     tempNote.id = key;
-    notes.add(tempNote);
+    this.notes.add(tempNote);
   });
 
-  isLoading = false;
+  this.isLoading = false;
   notifyListeners();
   return this.notes;
 
@@ -91,32 +91,36 @@ notes.id = decodedData['title'];
 return notes.id;
  }
 
-  Future<String> deleteNote(Notes notes) async{
- 
-   final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
-   final resp = await http.delete(url,body:notes.toJson()); ////Peticion Delete 
-   final decodedData = json.decode(resp.body);
-  
-   notifyListeners();
-   return notes.id!;
- 
- 
- }
+ Future<String> deleteNote (Notes notes) async {
+   
+<<<<<<< HEAD
+<<<<<<< HEAD
+   
+ final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
+ final resp = await http.delete(url, body:notes.toJson() );
+ final decodedData = json.decode(resp.body);
 
-//  Future<String> deleteNote (Notes notes) async {
+notifyListeners();
+=======
+  isSaving= true;
+  notifyListeners();
+=======
+   
+>>>>>>> parent of 4954291 (arreglosv1)
+ final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
+ final resp = await http.delete(url, body:notes.toJson() );
+ final decodedData = json.decode(resp.body);
 
-//   isSaving = true;
-//   notifyListeners();
-  
-//  final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
-//  final resp = await http.delete(url, body:notes.toJson());
-//  final decodedData = json.decode(resp.body);
-
-//   isSaving = false;
-//   notifyListeners();
-//   return notes.id!;
+<<<<<<< HEAD
+  isSaving= false;
+  notifyListeners();
+>>>>>>> parent of 38888a9 (errorcarga)
+=======
+notifyListeners();
+>>>>>>> parent of 4954291 (arreglosv1)
+  return notes.id!;
  
-//   }
+  }
 
   Future<void> refreshNotes() {
     final duracion = Duration(seconds: 1);

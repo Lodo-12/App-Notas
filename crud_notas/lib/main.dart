@@ -1,4 +1,3 @@
-import 'package:crud_notas/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/screens/screens.dart';
@@ -37,7 +36,6 @@ class MyApp extends StatelessWidget {
        'note': (_) => NoteScreen(),
        'edit': (_) => NoteModifScreen(),
        'checking' : (_) => CheckAuthScreen(),
-       'loading': (_) => LoadingScreen(),
      },
     );
   }

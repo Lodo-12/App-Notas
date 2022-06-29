@@ -1,8 +1,7 @@
-import 'package:crud_notas/models/models.dart';
-import 'package:crud_notas/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/ui/input_decorations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:crud_notas/providers/note_form_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -23,11 +22,11 @@ class NoteScreen extends StatelessWidget {
 
 class _NoteBackScreen extends StatelessWidget {
 
-   _NoteBackScreen({super.key,
+  const _NoteBackScreen({super.key,
    required this.noteService});
 
   final NotesService noteService;
-  
+
   @override
   Widget build(BuildContext context) {
 
@@ -41,12 +40,33 @@ class _NoteBackScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
+        // actions: [ SizedBox(
+        //   height: 10,
+        //   width: 50,
+        //   child: 
+        //   // ListView.builder(
+        // //     padding: EdgeInsets.only(top: 15),
+        // //     itemCount: 1,
+        // //        itemBuilder: (BuildContext context, int index)=>GestureDetector(
+        // //          onTap: () {
+                
+        // //           noteService.deleteNote(noteService.notes[index]);
+        // //           Navigator.pop(context);
+        // //          }, 
+        // //         child: Icon(
+        // //         CupertinoIcons.trash,
+        // //          color: Colors.red,
+        // //         ),
+        // //     ),
+        // //       ),
+        // // ),
+        // ]
     ),
         body:
          Padding(padding: EdgeInsets.all(15),
          child: Form(
            key: notesForm.formKey,
-          //  autovalidateMode: AutovalidateMode.onUserInteraction,
+           autovalidateMode: AutovalidateMode.onUserInteraction,
            child: Column(
              crossAxisAlignment: CrossAxisAlignment.stretch,
              children: [
@@ -60,7 +80,6 @@ class _NoteBackScreen extends StatelessWidget {
                     if( value == null || value.length < 1)
                     return 'No has puesto nada';
                   },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecorations.authInputDecoration(
                     hintText: 'Titulo',
                     labelText: 'Titulo:'
@@ -76,7 +95,6 @@ class _NoteBackScreen extends StatelessWidget {
                     if( value == null || value.length < 1)
                     return 'No has puesto nada';
                   },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecorations.authInputDecoration(
                     hintText: 'Descripcion',
                     labelText: 'Descripcion:'
@@ -92,14 +110,14 @@ class _NoteBackScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 255, 255, 255))
                      ),
-                    onPressed: () async {
+                    onPressed: ()async{
+
+                      Navigator.pop(context);
                     
                     if( !notesForm.isValidForm()) return;
 
                     await noteService.saveOrCreateNote(notesForm.note);
-
-                     Navigator.pushNamed(context, 'loading');
-                                      
+                      
                     }
                      )
 

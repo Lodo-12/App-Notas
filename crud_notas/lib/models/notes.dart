@@ -37,7 +37,7 @@ class Notes {
       title: this.title,
       description: this.description,
       id: this.id,
-      userid: this.userid,
+       userid: this.userid,
     );
 }
 
