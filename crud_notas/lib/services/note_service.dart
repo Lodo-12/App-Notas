@@ -1,5 +1,3 @@
-import 'package:crud_notas/screens/home_screen.dart';
-import 'package:crud_notas/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -91,36 +89,44 @@ notes.id = decodedData['title'];
 return notes.id;
  }
 
+<<<<<<< HEAD
+  Future<String> deleteNote(Notes notes) async{
+=======
  Future<String> deleteNote (Notes notes) async {
    
-<<<<<<< HEAD
-<<<<<<< HEAD
    
  final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
  final resp = await http.delete(url, body:notes.toJson() );
  final decodedData = json.decode(resp.body);
 
 notifyListeners();
-=======
-  isSaving= true;
-  notifyListeners();
-=======
-   
->>>>>>> parent of 4954291 (arreglosv1)
- final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
- final resp = await http.delete(url, body:notes.toJson() );
- final decodedData = json.decode(resp.body);
-
-<<<<<<< HEAD
-  isSaving= false;
-  notifyListeners();
->>>>>>> parent of 38888a9 (errorcarga)
-=======
-notifyListeners();
->>>>>>> parent of 4954291 (arreglosv1)
   return notes.id!;
+>>>>>>> parent of 4954291 (arreglosv1)
  
-  }
+   final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
+   final resp = await http.delete(url,body:notes.toJson()); ////Peticion Delete 
+   final decodedData = json.decode(resp.body);
+  
+   notifyListeners();
+   return notes.id!;
+ 
+ 
+ }
+
+//  Future<String> deleteNote (Notes notes) async {
+
+//   isSaving = true;
+//   notifyListeners();
+  
+//  final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
+//  final resp = await http.delete(url, body:notes.toJson());
+//  final decodedData = json.decode(resp.body);
+
+//   isSaving = false;
+//   notifyListeners();
+//   return notes.id!;
+ 
+//   }
 
   Future<void> refreshNotes() {
     final duracion = Duration(seconds: 1);

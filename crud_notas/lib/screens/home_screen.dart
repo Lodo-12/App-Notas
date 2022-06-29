@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
         leading: IconButton(
            icon: Icon(Icons.login_outlined),
            onPressed: (){
+<<<<<<< HEAD
   showDialog(
               context: context,
                builder: (context) => AlertDialog(
@@ -53,6 +54,18 @@ class HomeScreen extends StatelessWidget {
              RawMaterialButton(
               onPressed: () {
               Navigator.pushNamed(context, 'loading');
+=======
+
+
+             authservice.logout();
+             Navigator.pushReplacementNamed(context, 'login');
+           }
+           ),
+           actions: [
+             RawMaterialButton(
+              onPressed: () {
+              LoadingScreen();
+>>>>>>> parent of 4954291 (arreglosv1)
               notes.clear();
              notesService.refreshNotes();
              },
@@ -87,9 +100,9 @@ class HomeScreen extends StatelessWidget {
            color: Colors.white),
       );
       }
+     )
     )
    );
-  )
   }
 
   void userNotes(NotesService notesService, Authservice authservice) {
