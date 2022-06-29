@@ -14,13 +14,14 @@ class HomeScreen extends StatelessWidget {
   bool isLoading = true;
   List<Notes> notes = [];  
 
+
   @override
   Widget build(BuildContext context) {
   final notesService = Provider.of<NotesService>(context);
   final authservice = Provider.of<Authservice>(context, listen: false);
   if( notesService.isLoading) return LoadingScreen();
   userNotes(notesService, authservice);
-    return Scaffold(
+      return Scaffold(
       backgroundColor: Color.fromARGB(255, 177, 141, 74),
       appBar: AppBar(
         title: Text('Notas'),
@@ -30,8 +31,7 @@ class HomeScreen extends StatelessWidget {
         leading: IconButton(
            icon: Icon(Icons.login_outlined),
            onPressed: (){
-<<<<<<< HEAD
-  showDialog(
+            showDialog(
               context: context,
                builder: (context) => AlertDialog(
                 title: Text('¿Quieres salir?'),
@@ -50,27 +50,21 @@ class HomeScreen extends StatelessWidget {
                 ],
                )
                );
-           actions: [
-             RawMaterialButton(
-              onPressed: () {
-              Navigator.pushNamed(context, 'loading');
-=======
+               
 
-
-             authservice.logout();
-             Navigator.pushReplacementNamed(context, 'login');
+             
            }
            ),
            actions: [
              RawMaterialButton(
               onPressed: () {
-              LoadingScreen();
->>>>>>> parent of 4954291 (arreglosv1)
+                Navigator.pushNamed(context, 'loading');
               notes.clear();
-             notesService.refreshNotes();
+              notesService.refreshNotes();
              },
               child: Icon(CupertinoIcons.refresh))
-           ];
+           ],
+      ),
       body: ListView.builder(
         itemCount: notes.length,
        itemBuilder: (BuildContext context, int index)=>GestureDetector(
@@ -81,8 +75,8 @@ class HomeScreen extends StatelessWidget {
           child: _NotesCard(
             note: notes[index], 
           )
-            )
-          );
+            ),
+          ),
            floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white10,
         onPressed: () { 
@@ -98,11 +92,9 @@ class HomeScreen extends StatelessWidget {
            CupertinoIcons.add,
            size: 30, 
            color: Colors.white),
+      ),
+
       );
-      }
-     )
-    )
-   );
   }
 
   void userNotes(NotesService notesService, Authservice authservice) {
@@ -149,4 +141,3 @@ class _NotesCard extends StatelessWidget {
     );
   }
 }
-

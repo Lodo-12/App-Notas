@@ -48,9 +48,26 @@ class _NoteBackScreen extends StatelessWidget {
             itemCount: 1,
                itemBuilder: (BuildContext context, int index)=>GestureDetector(
                  onTap: () {
-                
+                  showDialog(
+              context: context,
+               builder: (context) => AlertDialog(
+                title: Text('¿Quieres borrar la nota?'),
+                actions: [
+                  TextButton(
+                   child: Text('CANCEL'),
+                   onPressed: () => Navigator.pop(context),
+                  ),
+                  TextButton(
+                   child: Text('OK'),
+                   onPressed: () {
                   noteService.deleteNote(noteService.notes[index]);
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, 'loading');
+                   } ,
+                  )                     
+                ],
+               )
+               );
+
                  }, 
                 child: Icon(
                 CupertinoIcons.trash,
@@ -117,6 +134,7 @@ class _NoteBackScreen extends StatelessWidget {
 
                     await noteService.saveOrCreateNote(notesForm.note);
                       
+                      Navigator.pushNamed(context, 'loading');
                     }
                      )
 
