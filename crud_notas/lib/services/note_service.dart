@@ -91,19 +91,32 @@ notes.id = decodedData['title'];
 return notes.id;
  }
 
- Future<String> deleteNote (Notes notes) async {
-   
-  isSaving= true;
-  notifyListeners();
- final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
- final resp = await http.delete(url, body:notes.toJson());
- final decodedData = json.decode(resp.body);
-
-  isSaving= false;
-  notifyListeners();
-  return notes.id!;
+  Future<String> deleteNote(Notes notes) async{
  
-  }
+   final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
+   final resp = await http.delete(url,body:notes.toJson()); ////Peticion Delete 
+   final decodedData = json.decode(resp.body);
+  
+   notifyListeners();
+   return notes.id!;
+ 
+ 
+ }
+
+//  Future<String> deleteNote (Notes notes) async {
+
+//   isSaving = true;
+//   notifyListeners();
+  
+//  final url = Uri.https(_baseUrl, 'notes/${ notes.id}.json');
+//  final resp = await http.delete(url, body:notes.toJson());
+//  final decodedData = json.decode(resp.body);
+
+//   isSaving = false;
+//   notifyListeners();
+//   return notes.id!;
+ 
+//   }
 
   Future<void> refreshNotes() {
     final duracion = Duration(seconds: 1);
