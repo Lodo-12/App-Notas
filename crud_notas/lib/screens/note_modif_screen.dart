@@ -1,3 +1,4 @@
+import 'package:crud_notas/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_notas/services/note_service.dart';
 import 'package:crud_notas/ui/input_decorations.dart';
@@ -22,7 +23,9 @@ class NoteModifScreen extends StatelessWidget {
 
 class _NoteBackScreen extends StatelessWidget {
 
-  const _NoteBackScreen({super.key,
+  List<Notes> notes = [];
+
+   _NoteBackScreen({super.key,
    required this.noteService});
 
   final NotesService noteService;
@@ -30,6 +33,7 @@ class _NoteBackScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final notesService = Provider.of<NotesService>(context);
     final notesForm = Provider.of<NoteFormProvider>(context);
     final note = notesForm.note;
 
@@ -62,6 +66,8 @@ class _NoteBackScreen extends StatelessWidget {
                    onPressed: () {
                   noteService.deleteNote(noteService.notes[index]);
                   Navigator.pushNamed(context, 'loading');
+                   notes.clear();
+                   notesService.refreshNotes();
                    } ,
                   )                     
                 ],

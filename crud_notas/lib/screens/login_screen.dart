@@ -89,6 +89,7 @@ class _LoginForm extends StatelessWidget {
             prefixIcon: Icons.lock_outline,
           ),
           onChanged: (value) => loginForm.password = value,
+
           validator: (value) {
             return (value != null && value.length >= 6)
                 ? null

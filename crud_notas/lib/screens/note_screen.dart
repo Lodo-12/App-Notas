@@ -22,7 +22,8 @@ class NoteScreen extends StatelessWidget {
 
 
 class _NoteBackScreen extends StatelessWidget {
-
+  List<Notes> notes = [];
+  
    _NoteBackScreen({super.key,
    required this.noteService});
 
@@ -31,6 +32,7 @@ class _NoteBackScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final notesService = Provider.of<NotesService>(context);
     final notesForm = Provider.of<NoteFormProvider>(context);
     final note = notesForm.note;
 
@@ -99,6 +101,8 @@ class _NoteBackScreen extends StatelessWidget {
                     await noteService.saveOrCreateNote(notesForm.note);
 
                      Navigator.pushNamed(context, 'loading');
+                      notes.clear();
+                      notesService.refreshNotes();
                                       
                     }
                      )
