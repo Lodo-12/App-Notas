@@ -22,12 +22,13 @@ class HomeScreen extends StatelessWidget {
   if( notesService.isLoading) return LoadingScreen();
   userNotes(notesService, authservice);
       return Scaffold(
-      backgroundColor: Color.fromARGB(255, 177, 141, 74),
+      // backgroundColor: Color.fromARGB(255, 177, 141, 74),
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: Text('Notas'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.amber.shade600,
         leading: IconButton(
            icon: Icon(Icons.login_outlined),
            onPressed: (){
